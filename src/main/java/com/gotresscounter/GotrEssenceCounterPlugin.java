@@ -1,13 +1,11 @@
-package com.example;
+package com.gotresscounter;
 
 import com.google.inject.Provides;
 import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.*;
-import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.api.events.*;
-import net.runelite.api.widgets.Widget;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.game.ItemManager;
@@ -15,14 +13,11 @@ import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 
-import java.security.Guard;
-import java.util.Arrays;
-
 @Slf4j
 @PluginDescriptor(
-	name = "Example"
+	name = "GOTR Essence Counter"
 )
-public class ExamplePlugin extends Plugin
+public class GotrEssenceCounterPlugin extends Plugin
 {
 	private static final int GOTR_WIDGET_ID = 48889876;
 
@@ -30,7 +25,7 @@ public class ExamplePlugin extends Plugin
 	private Client client;
 
 	@Inject
-	private ExampleConfig config;
+	private GotrEssenceCounterConfig config;
 
 	@Inject
 	private ItemManager itemManager;
@@ -73,6 +68,10 @@ public class ExamplePlugin extends Plugin
 			return;
 		}
 
+		if (!isInGotr()) {
+			return;
+		}
+
 		ItemContainer inventory = event.getItemContainer();
 
 		int fragmentsCount = inventory.count(ItemID.GUARDIAN_FRAGMENTS);
@@ -112,9 +111,9 @@ public class ExamplePlugin extends Plugin
 	}
 
 	@Provides
-	ExampleConfig provideConfig(ConfigManager configManager)
+	GotrEssenceCounterConfig provideConfig(ConfigManager configManager)
 	{
-		return configManager.getConfig(ExampleConfig.class);
+		return configManager.getConfig(GotrEssenceCounterConfig.class);
 	}
 
 	@Subscribe

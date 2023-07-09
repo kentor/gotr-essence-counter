@@ -1,4 +1,4 @@
-package com.example;
+package com.gotresscounter;
 
 import net.runelite.client.ui.overlay.infobox.InfoBox;
 
@@ -6,9 +6,9 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class GuardianEssenceInfoBox extends InfoBox {
-    public int count = 0;
+    protected int count = 0;
 
-    GuardianEssenceInfoBox(BufferedImage image, ExamplePlugin plugin) {
+    GuardianEssenceInfoBox(BufferedImage image, GotrEssenceCounterPlugin plugin) {
         super(image, plugin);
     }
 
